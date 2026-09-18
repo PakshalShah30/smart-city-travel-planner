@@ -10,6 +10,6 @@
     "types": ["node"],
     "jsx": "react-jsx"
   },
-  "include": ["src/lib/**/*.ts", "src/db/seed/**/*.ts", "scripts/benchmark.ts"],
+  "include": ["src/lib/**/*.ts", "src/db/seed/**/*.ts", "src/db/ingest/**/*.ts", "scripts/*.ts"],
   "exclude": ["**/*.test.ts"]
 }

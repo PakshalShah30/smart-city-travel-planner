@@ -1,0 +1,912 @@
+{
+ "generator": "trimmed from mumbai-overpass.raw.json for tests",
+ "elements": [
+  {
+   "type": "way",
+   "id": 28845634,
+   "center": {
+    "lat": 18.9219626,
+    "lon": 72.8345609
+   },
+   "tags": {
+    "building": "yes",
+    "building:colour": "#d4ab88",
+    "building:part": "yes",
+    "historic": "monument",
+    "name": "Gateway of India - गेटवे ऑफ इंडिया",
+    "name:cs": "Brána Indie",
+    "name:cy": "Porth India",
+    "name:de": "Portal von Indien",
+    "name:en": "Gateway of India",
+    "name:eo": "Pordego al Barato",
+    "name:es": "Puerta de la India",
+    "name:fa": "دروازه هند",
+    "name:fr": "Porte de l'Inde",
+    "name:gl": "Porta da India",
+    "name:gu": "ભારતનું પ્રવેશદ્વાર",
+    "name:he": "השער להודו",
+    "name:hi": "गेटवे ऑफ़ इन्डिया",
+    "name:ja": "インド門",
+    "name:ko": "인도문",
+    "name:ml": "ഗേറ്റ് വേ ഓഫ് ഇന്ത്യ",
+    "name:mr": "भारताचे प्रवेशद्वार",
+    "name:pa": "ਗੇਟਵੇ ਆਫ ਇੰਡਿਆ",
+    "name:pt": "Portal da Índia",
+    "name:ru": "Ворота в Индию",
+    "name:sv": "Porten till Indien",
+    "name:ta": "இந்தியாவின் நுழைவாயில்",
+    "wikidata": "Q864862",
+    "wikimedia_commons": "Category:Gateway of India",
+    "wikipedia": "en:Gateway of India"
+   }
+  },
+  {
+   "type": "node",
+   "id": 2127352565,
+   "lat": 18.9630478,
+   "lon": 72.931902,
+   "tags": {
+    "historic": "ruins",
+    "name": "Elephanta Caves",
+    "name:en": "Elephanta Caves",
+    "name:mr": "एलिफंटा लेणी",
+    "natural": "cave_entrance",
+    "tourism": "attraction",
+    "website": "https://whc.unesco.org/en/list/244",
+    "wikidata": "Q649384",
+    "wikipedia": "en:Elephanta Caves"
+   }
+  },
+  {
+   "type": "way",
+   "id": 107441516,
+   "center": {
+    "lat": 18.9398631,
+    "lon": 72.8354028
+   },
+   "tags": {
+    "addr:city": "Mumbai",
+    "building:levels": "7",
+    "building:part": "train_station",
+    "description": "WHC-protected part of the station complex.",
+    "heritage": "1",
+    "heritage:operator": "whc",
+    "loc_name": "Chhatrapati Shivaji Terminus",
+    "loc_name:en": "Chhatrapati Shivaji Terminus",
+    "loc_name:hi": "छत्रपती शिवाजी टर्मिनस",
+    "loc_name:mr": "छत्रपती शिवाजी टर्मिनस",
+    "name": "Chhatrapati Shivaji Maharaj Terminus",
+    "name:en": "Chhatrapati Shivaji Maharaj Terminus",
+    "name:hi": "छत्रपती शिवाजी महाराज टर्मिनस",
+    "name:mr": "छत्रपती शिवाजी महाराज टर्मिनस",
+    "name:ur": "چھترپتی شیواجی مہاراج ٹرمینس",
+    "old_name": "Victoria Terminus",
+    "old_name:en": "Victoria Terminus",
+    "old_name:fr": "Gare de Victoria",
+    "old_name:hi": "व्हिक्टोरिया टर्मिनस",
+    "old_name:mr": "व्हिक्टोरिया टर्मिनस",
+    "operator": "Central Railway",
+    "ref:whc": "945",
+    "short_name": "CSMT;CST;VT",
+    "short_name:en": "CSMT;CST;VT",
+    "short_name:hi": "सीएसएमटी;सीएसटी;व्हीटी",
+    "short_name:mr": "सीएसएमटी;सीएसटी;व्हीटी",
+    "tourism": "attraction",
+    "whc:criteria": "(ii),(iv)",
+    "whc:inscription_date": "2004",
+    "wheelchair": "yes",
+    "wikidata": "Q235884",
+    "wikipedia": "en:Chhatrapati Shivaji Terminus"
+   }
+  },
+  {
+   "type": "way",
+   "id": 49001325,
+   "center": {
+    "lat": 18.9473287,
+    "lon": 72.8345502
+   },
+   "tags": {
+    "amenity": "marketplace",
+    "landuse": "retail",
+    "name": "Crawford Market",
+    "name:etymology:wikidata": "Q4798356",
+    "official_name": "Mahatma Jyotiba Phule Mandai",
+    "official_name:etymology:wikidata": "Q314394",
+    "official_name:hi": "महात्मा ज्योतिबा फुले मंडई",
+    "tourism": "attraction",
+    "wikidata": "Q5182895",
+    "wikimedia_commons": "Category:Crawford Market",
+    "wikipedia": "en:Crawford Market"
+   }
+  },
+  {
+   "type": "node",
+   "id": 674769829,
+   "lat": 18.9828229,
+   "lon": 72.8089926,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "हाजी अली दर्गा",
+    "name:en": "Haji Ali Dargah",
+    "name:hi": "हाजी अली दरगाह",
+    "phone": "+91-22-2352-9082",
+    "religion": "muslim",
+    "website": "https://www.hajialidargah.in/",
+    "wikidata": "Q542756",
+    "wikimedia_commons": "Category:Haji Ali Dargah",
+    "wikipedia": "en:Haji Ali Dargah"
+   }
+  },
+  {
+   "type": "way",
+   "id": 54224946,
+   "center": {
+    "lat": 18.9324913,
+    "lon": 72.8315008
+   },
+   "tags": {
+    "amenity": "fountain",
+    "historic": "monument",
+    "leisure": "garden",
+    "name": "Flora Fountain",
+    "name:en": "Flora Fountain",
+    "old_name": "Frere Fountain",
+    "wikidata": "Q5460296",
+    "wikimedia_commons": "Category:Flora_Fountain",
+    "wikipedia": "en:Flora Fountain"
+   }
+  },
+  {
+   "type": "way",
+   "id": 38718204,
+   "center": {
+    "lat": 18.9454866,
+    "lon": 72.7936879
+   },
+   "tags": {
+    "addr:city": "Mumbai",
+    "name": "Banganga Tank",
+    "natural": "water",
+    "tourism": "attraction",
+    "water": "reservoir",
+    "wikidata": "Q4855094",
+    "wikimedia_commons": "Category:Banganga Tank",
+    "wikipedia": "en:Banganga Tank"
+   }
+  },
+  {
+   "type": "node",
+   "id": 674906629,
+   "lat": 18.9791636,
+   "lon": 72.8348012,
+   "tags": {
+    "name": "भाऊ दाजी लाड संग्रहालय",
+    "name:en": "Bhau Daji Lad Museum (Victoria & Albert Museum)",
+    "old_name": "Victoria & Albert Museum",
+    "tourism": "museum",
+    "wikidata": "Q5303985",
+    "wikimedia_commons": "Category:Dr. Bhau Daji Lad Museum",
+    "wikipedia": "en:Dr. Bhau Daji Lad Museum"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7019038585,
+   "lat": 19.2093238,
+   "lon": 72.9163268,
+   "tags": {
+    "name": "संजय गांधी राष्ट्रीय उद्यान",
+    "name:en": "Sanjay Gandhi National Park",
+    "tourism": "attraction"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4119416792,
+   "lat": 18.9491882,
+   "lon": 72.8199216,
+   "tags": {
+    "name": "Taraporewala Aquarium",
+    "name:en": "Taraporewala Aquarium",
+    "name:hi": "तारापोरवाला मत्स्यालय",
+    "name:ml": "താരാപ്പൂർവാലാ അക്വേറിയം",
+    "tourism": "aquarium",
+    "wikidata": "Q31509",
+    "wikimedia_commons": "Category:Taraporewala Aquarium",
+    "wikipedia": "en:Taraporewala Aquarium"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4048579847,
+   "lat": 18.9142991,
+   "lon": 72.8261446,
+   "tags": {
+    "addr:city": "Mumbai",
+    "addr:postcode": "400005",
+    "addr:street": "Harbour Heights service road",
+    "name": "Go Bonkers",
+    "opening_hours": "Tu-Su 10:00-20:00",
+    "tourism": "theme_park"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4537775994,
+   "lat": 19.2172729,
+   "lon": 72.8475847,
+   "tags": {
+    "addr:postcode": "400092",
+    "addr:street": "Sai Baba Mandir Road",
+    "amenity": "place_of_worship",
+    "name:en": "Saibaba Mandir (Saibaba Temple)",
+    "opening_hours": "Mo-Su 07:00-20:00",
+    "religion": "hindu",
+    "wheelchair": "no"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4583583497,
+   "lat": 18.9253433,
+   "lon": 72.8180282,
+   "tags": {
+    "addr:city": "Mumbai",
+    "addr:street": "Sir Dorab Tata Road",
+    "name": "Nariman Point",
+    "name:en": "Nariman Point",
+    "name:hi": "नरीमन पोइंट",
+    "opening_hours": "24/7",
+    "phone": "07828953774",
+    "tourism": "attraction",
+    "wikidata": "Q3632268",
+    "wikimedia_commons": "Category:Nariman Point",
+    "wikipedia": "en:Nariman Point"
+   }
+  },
+  {
+   "type": "node",
+   "id": 4815555824,
+   "lat": 19.0468349,
+   "lon": 72.8201139,
+   "tags": {
+    "addr:city": "Mumbai",
+    "addr:postcode": "400050",
+    "addr:street": "HK Bhaba Road",
+    "email": "srkfans@redchillies.com",
+    "name": "Mannat Lands End (Shah Rukh Khan's Bungalow)",
+    "opening_hours": "Mo-Sa 09:00-18:00",
+    "phone": "+91 (0)22-26058704",
+    "tourism": "attraction",
+    "website": "https://www.redchillies.com/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5056120381,
+   "lat": 19.0466884,
+   "lon": 72.8777111,
+   "tags": {
+    "air_conditioning": "yes",
+    "museum": "history",
+    "name": "BEST Museum",
+    "opening_hours": "Mo-Su 10:00-21:00",
+    "operator": "MCGC",
+    "operator:type": "government",
+    "tourism": "museum"
+   }
+  },
+  {
+   "type": "node",
+   "id": 5846484885,
+   "lat": 18.9708283,
+   "lon": 72.807875,
+   "tags": {
+    "addr:housenumber": "24",
+    "addr:postcode": "400026",
+    "addr:street": "Dr Gopalrao Deshmukh Marg",
+    "check_date": "2026-09-06",
+    "check_date:opening_hours": "2026-09-06",
+    "email": "nmicmumbai@nfdcindia.com",
+    "name:en": "National Museum of Indian Cinema",
+    "name:hi": "भारतीय चित्रपट राष्ट्रीय संग्रहालय",
+    "opening_hours": "Tu-Su 10:00-18:00",
+    "tourism": "museum",
+    "website": "https://nmicindia.com/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6110265789,
+   "lat": 19.1059626,
+   "lon": 72.8513087,
+   "tags": {
+    "addr:postcode": "400057",
+    "amenity": "place_of_worship",
+    "name:en": "Ram Mandir",
+    "opening_hours": "Mo-Su 06:00-21:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6110571686,
+   "lat": 19.1053592,
+   "lon": 72.8465173,
+   "tags": {
+    "amenity": "theatre",
+    "name:en": "Suncity Theatre",
+    "opening_hours": "Mo-Su 10:00-22:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6110577585,
+   "lat": 19.1007306,
+   "lon": 72.8449115,
+   "tags": {
+    "amenity": "theatre",
+    "name:en": "Dinanath Mangeshkar Natyagruha",
+    "opening_hours": "Mo-Su 10:00-20:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6116133009,
+   "lat": 19.1035255,
+   "lon": 72.8521387,
+   "tags": {
+    "addr:postcode": "400057",
+    "addr:street": "Ram Bhau Barve Marg",
+    "amenity": "place_of_worship",
+    "name:en": "Saibaba Temple",
+    "opening_hours": "Mo-Su 07:00-21:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6280152487,
+   "lat": 18.9164991,
+   "lon": 72.8276449,
+   "tags": {
+    "amenity": "place_of_worship",
+    "check_date": "2026-03-12",
+    "name": "चाबड हाऊस",
+    "name:en": "Chabad House Mumbai",
+    "name:he": "בית חב\"ד מומבאי",
+    "opening_hours": "Su-Fr 07:30-20:30",
+    "phone": "+919769060840",
+    "religion": "jewish"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7252610930,
+   "lat": 19.1982091,
+   "lon": 72.9738017,
+   "tags": {
+    "addr:city": "Thane",
+    "addr:housenumber": "ROOM 202 KRISHNA HERITAGE BUILDING opposite GANESH CINEMA, Charai, Thane West",
+    "addr:postcode": "400601",
+    "addr:street": "Arvind Dikshit Rd",
+    "amenity": "arts_centre",
+    "description": "art , design , printmaking studio",
+    "email": "kuchbhistudio@gmail.com",
+    "name": "KUCHBHI STUDIO",
+    "opening_hours": "Mo-Su 10:00-18:00",
+    "phone": "+91 9321227630",
+    "website": "https://www.instagram.com/KUCHBHISTUDIO"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8036002541,
+   "lat": 19.0807327,
+   "lon": 72.9107148,
+   "tags": {
+    "addr:city": "Mumbai",
+    "addr:postcode": "400075",
+    "addr:street": "Ram Narayan Narkar marg",
+    "leisure": "park",
+    "name": "Odeon Garden",
+    "opening_hours": "Mo-Su 06:30-11:30,16:00-23:00",
+    "opening_hours:covid19": "off",
+    "start_date": "2007/05/10"
+   }
+  },
+  {
+   "type": "node",
+   "id": 8202732141,
+   "lat": 19.080562,
+   "lon": 72.8614154,
+   "tags": {
+    "addr:city": "Mumabi",
+    "addr:postcode": "400057",
+    "addr:street": "Mumbai University",
+    "leisure": "park",
+    "name": "Kalina University Campus Park",
+    "opening_hours": "Mo-Sa 08:00-18:00",
+    "operator": "Mumbai University"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9027183278,
+   "lat": 19.1526461,
+   "lon": 72.8862794,
+   "tags": {
+    "addr:city": "Mumbai",
+    "addr:housenumber": "Ruby Isle",
+    "addr:postcode": "400065",
+    "addr:street": "Royal Palms",
+    "leisure": "park",
+    "name": "Ruby Isle Garden",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "opening_hours:covid19": "restricted",
+    "operator": "Ruby Isle CHS"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9447540847,
+   "lat": 18.9353781,
+   "lon": 72.8321868,
+   "tags": {
+    "addr:street": "Queens Mansion, 3rd floor, G. Talwatkar Marg, Fort, Mumbai, Maharashtra 400001",
+    "description": "Enduring gallery exhibiting contemporary works in various media by Indian & international artists.",
+    "name": "Chemould Prescott Road",
+    "opening_hours": "Mo-Sa 10:00-18:00",
+    "phone": "022 2200 0211",
+    "tourism": "gallery",
+    "website": "https://www.gallerychemould.com/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 9543574917,
+   "lat": 19.0773625,
+   "lon": 72.8661478,
+   "tags": {
+    "addr:city": "Mumbai",
+    "addr:housenumber": "Pride Of Kain",
+    "addr:postcode": "400098",
+    "addr:street": "Sunder Nagar",
+    "description": "Garden",
+    "leisure": "park",
+    "name": "Sunder Nagar Garden",
+    "opening_hours": "2hrs",
+    "opening_hours:covid19": "closed"
+   }
+  },
+  {
+   "type": "node",
+   "id": 10282425056,
+   "lat": 19.2602005,
+   "lon": 72.8598513,
+   "tags": {
+    "addr:city": "Mumbai",
+    "addr:housenumber": "srinagar",
+    "addr:postcode": "400068",
+    "addr:street": "Hari Shankar Joshi Road",
+    "description": "this park  only  for  child and their  parents. Student  are  not  alloewd  in this  park.",
+    "fax": "0001112222",
+    "leisure": "park",
+    "name": "western park",
+    "opening_hours": "10:00-22:00",
+    "operator": "shrinarayan pal"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11217402650,
+   "lat": 19.0924542,
+   "lon": 72.8831198,
+   "tags": {
+    "access": "yes",
+    "addr:city": "Mumabi",
+    "addr:district": "maharastara",
+    "addr:housenumber": "bialbazzar",
+    "addr:postcode": "400072",
+    "addr:street": "kurla road",
+    "description": "sid",
+    "leisure": "park",
+    "name": "bialbazzar",
+    "opening_hours": "Mo-Fr 09:00-18:00",
+    "operator": "bustop",
+    "operator:type": "public"
+   }
+  },
+  {
+   "type": "node",
+   "id": 11617862179,
+   "lat": 19.1191483,
+   "lon": 72.9132017,
+   "tags": {
+    "access": "private",
+    "charge": "none",
+    "fee": "no",
+    "garden:type": "residential",
+    "leisure": "garden",
+    "name": "olympia gardern",
+    "opening_hours": "Mo-Fr 09:00-17:00",
+    "operator": "yerevan heights",
+    "operator:type": "private",
+    "payment:none": "yes"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12238341882,
+   "lat": 19.2569892,
+   "lon": 72.9845963,
+   "tags": {
+    "addr:city": "Thane",
+    "addr:district": "Thane",
+    "addr:postcode": "400607",
+    "addr:street": "Central Avenue",
+    "dog": "yes",
+    "leisure": "park",
+    "name": "Children's Garden",
+    "opening_hours": "Mo-Su 09:00-18:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12394169110,
+   "lat": 19.1451735,
+   "lon": 72.8624328,
+   "tags": {
+    "addr:city": "Mumbai",
+    "addr:district": "Goregaon",
+    "addr:housenumber": "NH8",
+    "addr:postcode": "400065",
+    "addr:street": "Arjuna Camp, SRPF GROUDS, NH8, Goregaon, Mumbai, Maharashtra",
+    "description": "Indian School of Calisthenics (ISC) in Goregaon, Mumbai – your gateway to innovative Calisthenics and Fitness training.",
+    "leisure": "park",
+    "name": "Indian School of Calisthenics Park",
+    "opening_hours": "06:00 am- 10:00 am, 05:00 pm -10:00 pm (Monday to Saturday)",
+    "operator": "ISC",
+    "operator:type": "public",
+    "phone": "7710944547",
+    "website": "https://indianschoolofcalisthenics.com/"
+   }
+  },
+  {
+   "type": "node",
+   "id": 12548067914,
+   "lat": 19.2564988,
+   "lon": 72.9840406,
+   "tags": {
+    "addr:city": "Thane",
+    "addr:district": "Thane",
+    "addr:housenumber": "Fortuna, Hiranandani Estate",
+    "addr:postcode": "400607",
+    "addr:street": "Ghodbunder Road",
+    "leisure": "park",
+    "name": "Reserved Park next to Fortuna",
+    "note": "Restricted Access",
+    "opening_hours": "Mo-Fr 08:00-18:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13041186602,
+   "lat": 19.242538,
+   "lon": 72.8631178,
+   "tags": {
+    "leisure": "park",
+    "name": "Meenatai Thackrey Garden",
+    "name:mr": "मीनाताई ठाकरे उद्यान",
+    "opening_hours": "Mo-Su 05:00-13:00, 16:00-21:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13352965912,
+   "lat": 19.1361088,
+   "lon": 72.8545331,
+   "tags": {
+    "access": "yes",
+    "addr:city": "Mumbai",
+    "addr:district": "Mumbai Suburban",
+    "addr:postcode": "400060",
+    "addr:street": "Service Road",
+    "leisure": "park",
+    "name": "Rajaram Garden",
+    "opening_hours": "Mo-Su 06:00-10:00AM Mo-Su 06:00-10:00PM"
+   }
+  },
+  {
+   "type": "node",
+   "id": 13426728737,
+   "lat": 19.2487165,
+   "lon": 72.8462259,
+   "tags": {
+    "addr:city": "Mumbai",
+    "addr:postcode": "400103",
+    "addr:street": "I C Colony Cross Road No 5 near 206 last bus stop",
+    "leisure": "park",
+    "name": "Fish Park",
+    "opening_hours": "Mo-Su 06:00-22:00"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1579337883,
+   "lat": 19.1038099,
+   "lon": 72.853807,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Hanuman Mandir",
+    "religion": "hindu"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3217175771,
+   "lat": 19.0595127,
+   "lon": 72.912841,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Hanuman Mandir",
+    "religion": "hindu"
+   }
+  },
+  {
+   "type": "node",
+   "id": 3224692245,
+   "lat": 19.1694988,
+   "lon": 72.9591496,
+   "tags": {
+    "addr:city": "Mulund (East)",
+    "amenity": "place_of_worship",
+    "name": "Hanuman Mandir",
+    "religion": "hindu"
+   }
+  },
+  {
+   "type": "node",
+   "id": 6395275382,
+   "lat": 19.2231473,
+   "lon": 72.8564091,
+   "tags": {
+    "addr:city": "Borivali",
+    "addr:postcode": "400066",
+    "addr:street": "Dattapada",
+    "amenity": "place_of_worship",
+    "denomination": "hindu",
+    "name": "Hanuman Mandir",
+    "religion": "hindu"
+   }
+  },
+  {
+   "type": "node",
+   "id": 7667165182,
+   "lat": 19.2180094,
+   "lon": 72.8432484,
+   "tags": {
+    "leisure": "park",
+    "name": "BMC Park",
+    "opening_hours": "24/7"
+   }
+  },
+  {
+   "type": "way",
+   "id": 635156304,
+   "center": {
+    "lat": 19.2432705,
+    "lon": 72.8503487
+   },
+   "tags": {
+    "leisure": "park",
+    "name": "BMC Park"
+   }
+  },
+  {
+   "type": "way",
+   "id": 810194994,
+   "center": {
+    "lat": 19.2526522,
+    "lon": 72.8493595
+   },
+   "tags": {
+    "leisure": "park",
+    "name": "BMC Park"
+   }
+  },
+  {
+   "type": "node",
+   "id": 458876984,
+   "lat": 18.9506941,
+   "lon": 72.7989339,
+   "tags": {
+    "amenity": "place_of_worship",
+    "religion": "jain"
+   }
+  },
+  {
+   "type": "node",
+   "id": 610242127,
+   "lat": 18.9604654,
+   "lon": 72.8153373,
+   "tags": {
+    "addr:housename": "Church Mission House",
+    "amenity": "place_of_worship",
+    "check_date": "2026-03-20",
+    "date": "1921"
+   }
+  },
+  {
+   "type": "node",
+   "id": 714829538,
+   "lat": 18.9558508,
+   "lon": 72.8297178,
+   "tags": {
+    "amenity": "marketplace",
+    "goods": "wood work; mouldings"
+   }
+  },
+  {
+   "type": "node",
+   "id": 714858844,
+   "lat": 18.952807,
+   "lon": 72.8302604,
+   "tags": {
+    "amenity": "marketplace",
+    "goods": "flowers"
+   }
+  },
+  {
+   "type": "node",
+   "id": 714896949,
+   "lat": 18.9545241,
+   "lon": 72.8265662,
+   "tags": {
+    "amenity": "place_of_worship",
+    "religion": "jain"
+   }
+  },
+  {
+   "type": "node",
+   "id": 347194749,
+   "lat": 19.07022,
+   "lon": 72.8287784,
+   "tags": {
+    "artwork_type": "statue",
+    "junction": "yes",
+    "name": "Dr Babasaheb Ambedkar",
+    "tourism": "artwork"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1289231870,
+   "lat": 19.0175495,
+   "lon": 72.8491666,
+   "tags": {
+    "access": "no",
+    "artwork_type": "statue",
+    "historic": "monument",
+    "name": "Mancherji Edulji Joshi Statue",
+    "tourism": "artwork"
+   }
+  },
+  {
+   "type": "node",
+   "id": 1646526594,
+   "lat": 19.0278184,
+   "lon": 72.8372671,
+   "tags": {
+    "artwork_type": "statue",
+    "name": "Chhatrapati Shivaji Maharaj",
+    "tourism": "artwork"
+   }
+  },
+  {
+   "type": "way",
+   "id": 112793779,
+   "center": {
+    "lat": 18.9895152,
+    "lon": 72.8370397
+   },
+   "tags": {
+    "historic": "industrial",
+    "landuse": "industrial",
+    "name": "Digvijay Mills"
+   }
+  },
+  {
+   "type": "way",
+   "id": 112793780,
+   "center": {
+    "lat": 18.9893701,
+    "lon": 72.8394224
+   },
+   "tags": {
+    "historic": "industrial",
+    "landuse": "industrial",
+    "name": "Western India Spinning and Weaving Mills"
+   }
+  },
+  {
+   "type": "relation",
+   "id": 5320872,
+   "center": {
+    "lat": 19.0826155,
+    "lon": 72.8978843
+   },
+   "tags": {
+    "addr:city": "mumbai",
+    "addr:postcode": "400086",
+    "addr:street": "kirol road",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "denomination": "roman_catholic",
+    "name": "FATIMA CHURCH",
+    "religion": "christian",
+    "service_times": "6 am and 7 am",
+    "type": "multipolygon"
+   }
+  },
+  {
+   "type": "relation",
+   "id": 5327411,
+   "center": {
+    "lat": 19.0275549,
+    "lon": 72.8508722
+   },
+   "tags": {
+    "amenity": "marketplace",
+    "building": "yes",
+    "name": "Matunga Market",
+    "type": "multipolygon"
+   }
+  },
+  {
+   "type": "node",
+   "id": 342120208,
+   "lat": 18.964365,
+   "lon": 72.8046198,
+   "tags": {
+    "amenity": "place_of_worship",
+    "name": "Saint Stephens",
+    "religion": "christian"
+   }
+  },
+  {
+   "type": "node",
+   "id": 346592564,
+   "lat": 19.0510021,
+   "lon": 72.8282639,
+   "tags": {
+    "amenity": "place_of_worship",
+    "check_date": "2025-01-09",
+    "denomination": "roman_catholic",
+    "name": "Mount Carmels Church",
+    "religion": "christian"
+   }
+  },
+  {
+   "type": "node",
+   "id": 346611983,
+   "lat": 19.0425669,
+   "lon": 72.8188717,
+   "tags": {
+    "created_by": "Potlatch 0.10f",
+    "name": "Amphitheatre",
+    "tourism": "attraction"
+   }
+  },
+  {
+   "type": "node",
+   "id": 346612688,
+   "lat": 19.0420614,
+   "lon": 72.818608,
+   "tags": {
+    "historic": "ruins",
+    "name": "Bandra Fort",
+    "old_name": "Castella de Aguarda"
+   }
+  }
+ ]
+}

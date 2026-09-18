@@ -91,7 +91,25 @@ Seven tables. Three decisions worth knowing about:
   geocoded rather than a POI, so its legs are computed on demand.
 - `opening_hours` is structured JSON, parsed once during ingestion. The solver
   never sees a raw OSM `opening_hours` string, and unparseable values are flagged
-  and treated as open rather than crashing the pipeline.
+  and treated as open rather than crashing the pipeline. The parser handles
+  97.6% of the real values in the Mumbai extract; the rest are things like
+  `"2hrs"` and are deliberately left unknown rather than guessed at.
+
+## Ranking places without ratings
+
+OpenStreetMap has no ratings, which is the central problem of ingestion. The
+Mumbai extract is 3,060 elements: 1,177 are unnamed, and of the rest there are
+742 places of worship and 657 parks — seventeen "Hanuman Mandir", ten "BMC
+Park". Nothing in the tags separates the Siddhivinayak Temple from a shrine on a
+side street.
+
+The one strong signal is notability. Only about eighty elements carry a Wikidata
+entry or a Wikipedia article, but they are almost exactly the right eighty:
+Gateway of India, Elephanta Caves, Haji Ali, Bhau Daji Lad, Flora Fountain,
+Crawford Market. So notability drives a pre-ranking, co-located duplicates are
+merged, generic names are penalised, and the top of that list is what gets
+enriched with real ratings from Google Places — a few hundred calls rather than
+several thousand.
 
 ## Licence
 

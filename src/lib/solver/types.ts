@@ -10,8 +10,8 @@ export type OpenWindow = {
 
 export type Hours =
   | { kind: 'always' }
-  /** Source data could not be parsed. Treated as open, but flagged. */
-  | { kind: 'unknown' }
+  /** Source data absent or unparseable. Treated as open, but flagged. */
+  | { kind: 'unknown'; raw?: string }
   | { kind: 'windows'; windows: OpenWindow[] };
 
 /** A place the solver may choose to include. */
