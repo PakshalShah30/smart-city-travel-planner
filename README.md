@@ -19,9 +19,14 @@ fixed budget and must return to your start. Choosing the best subset *and* the
 best order is the **Orienteering Problem** — NP-hard, and in the tourism
 literature the Tourist Trip Design Problem.
 
-The solver runs in three stages, all kept so each is a benchmark baseline for
-the next: greedy insertion, then 2-opt and Or-opt local search, then a
-constrained solver with time windows.
+The solver runs in stages, all kept so each is a baseline for the next: a naive
+popularity-first control, greedy insertion, then 2-opt and Or-opt local search,
+then a constrained solver with time windows.
+
+Current standing over 50 seeded scenarios — greedy insertion scores **33% higher**
+than the naive baseline, winning 48 of 50, with zero constraint violations from
+either. Full table and method in [docs/benchmark.md](docs/benchmark.md);
+regenerate with `npm run benchmark`.
 
 ## Status
 
@@ -40,7 +45,7 @@ above them changes.
 | 0 | Foundations: scaffold, data model, CI, deploy | Done |
 | 1 | Thin vertical slice: seeded data, greedy solver, first itinerary | Done |
 | 2 | Real data: OSM ingestion, OSRM travel-time matrices, two cities | Not started |
-| 3 | The optimizer: local search, constrained solver, published benchmark | Not started |
+| 3 | The optimizer: local search, constrained solver, published benchmark | Harness built, baselines published |
 | 4 | Product surface: map, accounts, share links, mobile | Not started |
 | 5 | Ship: end-to-end tests, docs, performance, launch | Not started |
 

@@ -7,7 +7,7 @@
  * `getCandidates` and `getCity` with PostGIS queries; the signatures do not
  * change, so nothing above this file has to.
  */
-import { MUMBAI, MUMBAI_POIS } from '@/db/seed/mumbai';
+import { MUMBAI, MUMBAI_POIS } from '../db/seed/mumbai';
 
 import type { Coord } from './geo';
 import type { Candidate } from './solver/types';

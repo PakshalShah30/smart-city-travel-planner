@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { MUMBAI_POIS } from '@/db/seed/mumbai';
+import { MUMBAI_POIS } from '../../db/seed/mumbai';
 import { estimateTravelSeconds, type Coord } from '../geo';
 import { isOpenDuring } from './hours';
 import { solveGreedy } from './greedy';

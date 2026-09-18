@@ -11,8 +11,8 @@
  * (Elephanta Caves, Sanjay Gandhi National Park), so rejection handling has
  * something real to chew on.
  */
-import { dailyWindow, dailyWindowExcept } from '@/lib/solver/hours';
-import type { Candidate } from '@/lib/solver/types';
+import { dailyWindow, dailyWindowExcept } from '../../lib/solver/hours';
+import type { Candidate } from '../../lib/solver/types';
 
 export const MUMBAI = {
   slug: 'mumbai',

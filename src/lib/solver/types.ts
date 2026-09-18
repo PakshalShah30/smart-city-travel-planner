@@ -57,6 +57,9 @@ export type SolveRequest = {
   lockedIds?: number[];
 };
 
+/** Every algorithm that can produce a Solution. Benchmarked against each other. */
+export type SolverName = 'popularity-first' | 'greedy';
+
 export type Stop = {
   candidate: Candidate;
   seq: number;
@@ -94,6 +97,14 @@ export type Solution = {
   slackS: number;
   /** Why strong candidates did not make it. Powers the "why this plan" view. */
   rejected: Rejection[];
-  solver: 'greedy';
+  solver: SolverName;
   solveMs: number;
+};
+
+/** The shape every solver shares, so the benchmark can run them uniformly. */
+export type Solver = {
+  name: SolverName;
+  /** Shown in the benchmark table. */
+  label: string;
+  solve: (req: SolveRequest) => Solution;
 };

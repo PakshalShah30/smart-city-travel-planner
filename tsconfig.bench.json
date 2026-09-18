@@ -1,0 +1,15 @@
+{
+  "//": "Compiles the solver, seed data and benchmark script to plain JS so the benchmark can run under node. Kept separate from tsconfig.json, which is noEmit and owned by Next.",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": ".bench",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2022",
+    "types": ["node"],
+    "jsx": "react-jsx"
+  },
+  "include": ["src/lib/**/*.ts", "src/db/seed/**/*.ts", "scripts/benchmark.ts"],
+  "exclude": ["**/*.test.ts"]
+}
