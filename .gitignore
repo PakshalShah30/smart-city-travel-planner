@@ -48,3 +48,6 @@ next-env.d.ts
 
 # Benchmark build output
 .bench
+
+# Raw OSM extracts (large, reproducible via scripts/fetch-overpass.sh)
+src/db/ingest/fixtures/*.raw.json

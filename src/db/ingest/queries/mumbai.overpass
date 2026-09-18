@@ -1,0 +1,27 @@
+// POI extract for Mumbai.
+//
+// Bounding box is (south, west, north, east) and covers the island city plus
+// the western suburbs as far as Borivali, which is where Sanjay Gandhi National
+// Park sits. Roughly 45km north to south.
+//
+// "out center tags" matters: most real attractions are mapped as ways or
+// relations, not nodes, so without "center" they come back with no coordinates
+// at all and the whole extract looks empty of anything important.
+[out:json][timeout:180];
+(
+  // Things people visit
+  nwr["tourism"~"^(attraction|museum|gallery|artwork|viewpoint|zoo|theme_park|aquarium)$"](18.88,72.77,19.28,72.99);
+
+  // Forts, monuments, ruins, memorials
+  nwr["historic"](18.88,72.77,19.28,72.99);
+
+  // Green space
+  nwr["leisure"~"^(park|garden|nature_reserve)$"](18.88,72.77,19.28,72.99);
+
+  // Temples, churches, mosques, markets, theatres
+  nwr["amenity"~"^(place_of_worship|marketplace|theatre|arts_centre)$"](18.88,72.77,19.28,72.99);
+
+  // Beaches and named coastline
+  nwr["natural"="beach"](18.88,72.77,19.28,72.99);
+);
+out center tags;
