@@ -30,24 +30,23 @@ regenerate with `npm run benchmark`.
 
 ## Status
 
-Phase 1 of 6. The planner works end to end: pick a city, a starting point, a
-date, a time and a budget, and it returns a routed, timed day plan with an
-explanation of what was left out and why.
-
-It runs **without a database**. Places come from a hand-curated seed module and
-travel times are straight-line estimates. Phase 2 swaps both for real ingested
-data and routed times by replacing two function bodies — `getCandidates` in
-`src/lib/pois.ts` and the `travelSeconds` passed into the solver — and nothing
-above them changes.
+Phase 1 of 5. The planner works end to end on seeded data: give it a start point
+and a time budget and it returns a routed, time-feasible itinerary. Travel times
+are still straight-line estimates rather than street-network routing, and the
+solver is greedy insertion only, so the itineraries are feasible but not yet good.
 
 | Phase | Scope | State |
 | --- | --- | --- |
 | 0 | Foundations: scaffold, data model, CI, deploy | Done |
 | 1 | Thin vertical slice: seeded data, greedy solver, first itinerary | Done |
-| 2 | Real data: OSM ingestion, OSRM travel-time matrices, two cities | Not started |
-| 3 | The optimizer: local search, constrained solver, published benchmark | Harness built, baselines published |
+| 2 | Real data: OSM ingestion, OSRM travel-time matrices, two cities | Next |
+| 3 | The optimizer: local search, constrained solver, published benchmark | Not started |
 | 4 | Product surface: map, accounts, share links, mobile | Not started |
 | 5 | Ship: end-to-end tests, docs, performance, launch | Not started |
+
+Phase 1 shipped geo primitives, opening-hours parsing, a scoring function, the
+schedule builder, greedy insertion, Mumbai seed data, and a planner UI wired to
+the solver, with unit tests across each.
 
 ## Stack
 
