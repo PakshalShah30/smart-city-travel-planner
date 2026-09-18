@@ -2,11 +2,16 @@
  * Smart City Travel Planner — database schema.
  *
  * Design notes that are easy to lose later:
- *  - Locations are PostGIS `geography(Point,4326)` so distance maths is in metres
- *    on a spheroid. Drizzle has no first-class geography type, so `geographyPoint`
- *    below is a custom type: it WRITES well-known text, but READS come back as the
- *    raw driver value. Always select coordinates explicitly with ST_X/ST_Y or
- *    ST_AsGeoJSON rather than reading the column directly.
+ *  - Locations are PostGIS `geometry(Point,4326)`, not `geography`. Drizzle's
+ *    customType quotes any type containing parentheses, which emits
+ *    `"geography(Point,4326)"` and fails as an unknown type, so we use Drizzle's
+ *    built-in `geometry` and cast at query time: `location::geography` gives
+ *    distances in metres on a spheroid, e.g.
+ *    `ST_DWithin(location::geography, $start::geography, $radiusMetres)`.
+ *  - Each location column carries a GIST index. At a few hundred POIs per city a
+ *    scan would be fine; the index matters once ingestion grows. Note it indexes
+ *    the geometry, not the geography cast — if the tables ever get large enough
+ *    for that to matter, add an expression index via `drizzle-kit generate --custom`.
  *  - `travel_times` is the precomputed POI-to-POI matrix. It is deliberately NOT
  *    computed per request: an N-to-N matrix is O(N^2), so we build it once per city
  *    at ingestion and read it back as a plain lookup.
@@ -17,8 +22,8 @@
  */
 import {
   boolean,
-  customType,
   doublePrecision,
+  geometry,
   index,
   integer,
   jsonb,
@@ -32,18 +37,15 @@ import {
   uuid,
 } from 'drizzle-orm/pg-core';
 
-/** PostGIS geography point. Write with {lng, lat}; read via ST_X/ST_Y. */
-export const geographyPoint = customType<{
-  data: { lng: number; lat: number };
-  driverData: string;
-}>({
-  dataType() {
-    return 'geography(Point,4326)';
-  },
-  toDriver(value) {
-    return `SRID=4326;POINT(${value.lng} ${value.lat})`;
-  },
-});
+/**
+ * A WGS84 point column. Values are `{ x: longitude, y: latitude }` — note the
+ * order: x is longitude, which is the opposite of how coordinates are usually
+ * spoken aloud. Cast to geography in queries that need metres.
+ */
+const point = (name: string) => geometry(name, { type: 'point', mode: 'xy', srid: 4326 });
+
+/** `{ x: longitude, y: latitude }`, as stored in any point column below. */
+export type LngLat = { x: number; y: number };
 
 /** One structured opening window. `day` is 0=Sunday .. 6=Saturday. */
 export type OpeningWindow = {
@@ -70,7 +72,7 @@ export const cities = pgTable(
     slug: text('slug').notNull(),
     name: text('name').notNull(),
     country: text('country').notNull(),
-    center: geographyPoint('center').notNull(),
+    center: point('center').notNull(),
     /** Default candidate radius, in metres, around the user's start point. */
     defaultRadiusM: integer('default_radius_m').notNull().default(5000),
     /** IANA name, e.g. "Asia/Kolkata". Opening hours are local to this. */
@@ -78,7 +80,10 @@ export const cities = pgTable(
     isActive: boolean('is_active').notNull().default(true),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
-  (t) => [uniqueIndex('cities_slug_key').on(t.slug)],
+  (t) => [
+    uniqueIndex('cities_slug_key').on(t.slug),
+    index('cities_center_idx').using('gist', t.center),
+  ],
 );
 
 export const categories = pgTable(
@@ -103,7 +108,7 @@ export const pois = pgTable(
     /** Identifier within that source, e.g. an OSM "node/240109189". */
     sourceId: text('source_id').notNull(),
     name: text('name').notNull(),
-    location: geographyPoint('location').notNull(),
+    location: point('location').notNull(),
     /** Typical dwell time in minutes. Drives the time budget. */
     visitDurationMin: integer('visit_duration_min').notNull(),
     /** Normalised 0-10. Blended from rating, rating count and source signals. */
@@ -123,6 +128,7 @@ export const pois = pgTable(
   (t) => [
     uniqueIndex('pois_source_key').on(t.source, t.sourceId),
     index('pois_city_idx').on(t.cityId),
+    index('pois_location_idx').using('gist', t.location),
   ],
 );
 
@@ -183,7 +189,7 @@ export const itineraries = pgTable(
     shareSlug: text('share_slug'),
     title: text('title').notNull(),
     startLabel: text('start_label').notNull(),
-    startLocation: geographyPoint('start_location').notNull(),
+    startLocation: point('start_location').notNull(),
     startAt: timestamp('start_at', { withTimezone: true }).notNull(),
     budgetMin: integer('budget_min').notNull(),
     /** Category slugs the user selected. */
