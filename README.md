@@ -46,18 +46,20 @@ back to its built-in greedy solver whenever that service is unavailable.
 
 ## Running it locally
 
-Requires Node 22 or newer and a Postgres database with PostGIS available.
+Requires Node 22 or newer and a Neon Postgres project (PostGIS enabled).
 
 ```bash
 npm install
-cp .env.example .env.local   # then fill in DATABASE_URL
-npm run db:generate          # generate migrations from the schema
-npm run db:migrate           # apply them
+neon link
+npm run db:generate
+npm run db:migrate
 npm run dev
 ```
 
-`drizzle/0000_enable_postgis.sql` must run before the first generated migration —
-PostGIS has to exist before any `geography` column can be created.
+`neon link` writes `DATABASE_URL` into `.env.local`. `db:migrate` runs
+`scripts/enable-postgis.mjs` before applying migrations, because the extension has
+to exist before any `geography` column can be created and drizzle-kit has no
+pre-migration hook. It is idempotent, so it is safe on every run.
 
 ```bash
 npm run lint       # eslint
