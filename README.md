@@ -25,13 +25,20 @@ constrained solver with time windows.
 
 ## Status
 
-Phase 0 of 6. The application is scaffolded, the data model is defined and CI is
-green. There is no working planner yet.
+Phase 1 of 6. The planner works end to end: pick a city, a starting point, a
+date, a time and a budget, and it returns a routed, timed day plan with an
+explanation of what was left out and why.
+
+It runs **without a database**. Places come from a hand-curated seed module and
+travel times are straight-line estimates. Phase 2 swaps both for real ingested
+data and routed times by replacing two function bodies — `getCandidates` in
+`src/lib/pois.ts` and the `travelSeconds` passed into the solver — and nothing
+above them changes.
 
 | Phase | Scope | State |
 | --- | --- | --- |
-| 0 | Foundations: scaffold, data model, CI, deploy | In progress |
-| 1 | Thin vertical slice: seeded data, greedy solver, first itinerary | Not started |
+| 0 | Foundations: scaffold, data model, CI, deploy | Done |
+| 1 | Thin vertical slice: seeded data, greedy solver, first itinerary | Done |
 | 2 | Real data: OSM ingestion, OSRM travel-time matrices, two cities | Not started |
 | 3 | The optimizer: local search, constrained solver, published benchmark | Not started |
 | 4 | Product surface: map, accounts, share links, mobile | Not started |
