@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/**
+ * Design tokens. These mirror the product mockup: a warm neutral ground,
+ * terracotta for routes and primary actions, deep teal as the secondary accent.
+ * `--color-accent` is the one that is safe for white text (6.0:1); the brighter
+ * `--color-route` is for map lines and fills only, never behind text.
+ */
+:root {
+  --background: #fbf9f6;
+  --foreground: #1a1814;
+  --surface: #ffffff;
+  --muted: #6b6258;
+  --subtle: #8a8175;
+  --border: #e5dfd6;
+  --accent: #a8431f;
+  --accent-hover: #7e3216;
+  --route: #c4562f;
+  --teal: #1b5551;
+  --teal-soft: #e8f0ee;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-route: var(--route);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
