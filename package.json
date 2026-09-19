@@ -14,7 +14,9 @@
     "db:migrate": "npm run db:setup && drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "db:setup": "node --env-file=.env.local scripts/enable-postgis.mjs",
-    "benchmark": "tsc -p tsconfig.bench.json && node .bench/scripts/benchmark.js"
+    "benchmark": "tsc -p tsconfig.bench.json && node .bench/scripts/benchmark.js",
+    "build-matrix": "tsc -p tsconfig.bench.json && node .bench/scripts/build-matrix.js",
+    "db:seed": "tsc -p tsconfig.bench.json && node --env-file=.env.local .bench/scripts/seed.js"
   },
   "dependencies": {
     "@neon/config": "^1.7.2",

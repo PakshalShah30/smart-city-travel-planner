@@ -51,3 +51,9 @@ next-env.d.ts
 
 # Raw OSM extracts (large, reproducible via scripts/fetch-overpass.sh)
 src/db/ingest/fixtures/*.raw.json
+
+# Local routing graph build artifacts (large, rebuildable)
+osrm-data/
+
+# Computed matrices (large, rebuildable from the raw extract)
+src/db/ingest/build/

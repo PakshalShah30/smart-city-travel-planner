@@ -20,6 +20,7 @@
  *  - `opening_hours` is structured JSON, never the raw OSM string. Parsing happens
  *    once during ingestion so the solver never has to think about it.
  */
+import type { Hours } from '../lib/solver/types';
 import {
   boolean,
   doublePrecision,
@@ -47,23 +48,12 @@ const point = (name: string) => geometry(name, { type: 'point', mode: 'xy', srid
 /** `{ x: longitude, y: latitude }`, as stored in any point column below. */
 export type LngLat = { x: number; y: number };
 
-/** One structured opening window. `day` is 0=Sunday .. 6=Saturday. */
-export type OpeningWindow = {
-  day: number;
-  /** Minutes from midnight, local to the city's timezone. */
-  opensMin: number;
-  closesMin: number;
-};
-
-export type OpeningHours = {
-  /** Empty array means "no data"; check `alwaysOpen` before treating it as closed. */
-  windows: OpeningWindow[];
-  alwaysOpen: boolean;
-  /** True when the source string could not be parsed; the solver treats these as open. */
-  unparsed: boolean;
-  /** The original OSM value, kept so ingestion bugs are debuggable. */
-  raw?: string;
-};
+/**
+ * Opening hours are stored in exactly the shape the solver consumes, rather
+ * than a second parallel type that has to be converted at every boundary.
+ * Parsing happens once, during ingestion.
+ */
+export type { Hours as OpeningHours } from '../lib/solver/types';
 
 export const cities = pgTable(
   'cities',
@@ -116,7 +106,7 @@ export const pois = pgTable(
     rating: real('rating'),
     ratingCount: integer('rating_count'),
     primaryCategoryId: integer('primary_category_id').references(() => categories.id),
-    openingHours: jsonb('opening_hours').$type<OpeningHours>(),
+    openingHours: jsonb('opening_hours').$type<Hours>(),
     address: text('address'),
     photoRef: text('photo_ref'),
     /** Raw source tags, kept for debugging the normalisation layer. */

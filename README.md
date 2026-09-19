@@ -79,6 +79,31 @@ npm test           # vitest
 npm run build      # production build
 ```
 
+## Building a city's data
+
+Three steps, all one-time per city. The deployed application never calls a
+routing engine — every leg it needs is precomputed and stored, including the
+legs from each start point, which is why the start points sit in the matrix
+alongside the places.
+
+```bash
+./scripts/fetch-overpass.sh mumbai     # raw OSM extract
+./scripts/osrm-up.sh car               # local routing engine, leave running
+npm run build-matrix                   # in another terminal
+npm run db:seed
+```
+
+OSRM is a build-time tool, like a compiler. Once the matrix is in Postgres you
+can stop the container and delete `osrm-data/`. Docker is needed only for this;
+on macOS `brew install colima docker && colima start` is lighter than Docker
+Desktop. For walking legs too, run `./scripts/osrm-up.sh foot` on port 5001
+before building the matrix.
+
+At 500 places plus 5 start points that is 257,556 ordered pairs per mode,
+collected in 121 requests. Pairs more than 45 minutes apart are not stored: no
+six-hour day contains a 45-minute leg between consecutive stops, and dropping
+them is most of what keeps the table inside the database's free tier.
+
 ## Data model
 
 Seven tables. Three decisions worth knowing about:
