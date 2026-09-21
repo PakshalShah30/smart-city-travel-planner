@@ -16,7 +16,6 @@ PROFILE="${1:-car}"
 CITY="${CITY:-mumbai}"
 DATA_DIR="osrm-data/${CITY}-${PROFILE}"
 IMAGE="ghcr.io/project-osrm/osrm-backend:latest"
-OSMIUM_IMAGE="ghcr.io/osmcode/osmium-tool:latest"
 
 case "$PROFILE" in
   car)  LUA=/opt/car.lua;     PORT=5000 ;;
@@ -61,6 +60,23 @@ valid_pbf() {
 
 command -v docker >/dev/null || { echo "Docker not found. brew install colima docker && colima start"; exit 1; }
 docker info >/dev/null 2>&1 || { echo "Docker is installed but not running. Try: colima start"; exit 1; }
+
+# osmium does the clipping. A native one (brew install osmium-tool) is faster
+# and uses the Mac's memory rather than the Docker VM's. Without it, Debian's
+# packaged build runs in the official Debian image — both certain to exist,
+# unlike third-party osmium images. The repo is mounted at its own path so the
+# same relative paths work either way.
+run_osmium() {
+  if command -v osmium >/dev/null; then
+    echo "  using native $(osmium --version | head -1)"
+    osmium "$@"
+  else
+    echo "  no native osmium; installing Debian's into a throwaway container (brew install osmium-tool skips this)"
+    docker run --rm -v "$PWD:$PWD" -w "$PWD" debian:bookworm-slim sh -c \
+      'apt-get update -qq >/dev/null && apt-get install -y -qq --no-install-recommends osmium-tool >/dev/null && osmium "$@"' \
+      osmium "$@"
+  fi
+}
 
 mkdir -p "$DATA_DIR" osrm-data
 
@@ -129,15 +145,11 @@ if [ ! -f "$CLIPPED" ]; then
     echo "Source is $(mib "$PBF") MB — clipping to $BBOX before building."
     # complete_ways keeps roads whole across the boundary; simple is a
     # single low-memory pass that truncates them. Try the good one first.
-    clip() {
-      docker run --rm -v "$PWD/osrm-data:/data" "$OSMIUM_IMAGE" \
-        osmium extract -s "$1" -b "$BBOX" "/data/$(basename "$PBF")" \
-          -o "/data/${CITY}-${PROFILE}/city.osm.pbf" --overwrite
-    }
+    clip() { run_osmium extract -v -s "$1" -b "$BBOX" "$PBF" -o "$CLIPPED" --overwrite; }
     clip complete_ways || {
       echo "complete_ways failed — retrying with the single-pass simple strategy."
       rm -f "$CLIPPED"
-      clip simple
+      clip simple || { echo "Clipping failed; the osmium output above says why."; exit 1; }
     }
     valid_pbf "$CLIPPED" || { echo "Clip produced an invalid file; aborting."; exit 1; }
     echo "  clipped to $(mib "$CLIPPED") MB"
