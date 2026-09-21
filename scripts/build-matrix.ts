@@ -1,8 +1,9 @@
 /**
  * Computes the travel-time matrix for a city and writes it to disk.
  *
- * Requires a local OSRM (see scripts/osrm-up.sh). Run the car profile on :5000
- * and, if you want walking legs too, the foot profile on :5001.
+ * Requires a local OSRM (see scripts/osrm-up.sh). Run the car profile on :5100
+ * and, if you want walking legs too, the foot profile on :5101. Override with
+ * OSRM_CAR_PORT / OSRM_FOOT_PORT. (Not :5000 — AirPlay owns it on macOS.)
  *
  *   npm run build-matrix
  *
@@ -25,17 +26,32 @@ const OUT_DIR = 'src/db/ingest/build';
 type ProfileSpec = { mode: 'car' | 'foot'; port: number; osrmProfile: string };
 
 const PROFILES: ProfileSpec[] = [
-  { mode: 'car', port: 5000, osrmProfile: 'driving' },
-  { mode: 'foot', port: 5001, osrmProfile: 'foot' },
+  { mode: 'car', port: Number(process.env.OSRM_CAR_PORT ?? 5100), osrmProfile: 'driving' },
+  { mode: 'foot', port: Number(process.env.OSRM_FOOT_PORT ?? 5101), osrmProfile: 'foot' },
 ];
 
-async function reachable(port: number): Promise<boolean> {
+/**
+ * Checks that OSRM specifically is answering, not merely something. On macOS
+ * :5000 answers every request with a 403 from AirPlay, and "nothing answering"
+ * would send you looking in the wrong place.
+ */
+async function probe(port: number): Promise<{ ok: true } | { ok: false; why: string }> {
+  let res: Response;
   try {
-    const res = await fetch(`http://127.0.0.1:${port}/table/v1/driving/72.83,18.92;72.82,18.94`);
-    return res.ok;
+    res = await fetch(`http://127.0.0.1:${port}/table/v1/driving/72.83,18.92;72.82,18.94`);
   } catch {
-    return false;
+    return { ok: false, why: `nothing answering on :${port}` };
   }
+  const body = (await res.json().catch(() => null)) as { code?: string } | null;
+  if (body?.code === 'Ok') return { ok: true };
+  const server = res.headers.get('server');
+  return {
+    ok: false,
+    why:
+      `:${port} answered HTTP ${res.status}` +
+      (server ? ` from "${server}"` : '') +
+      (body?.code ? ` (OSRM says ${body.code})` : ' — that is not OSRM'),
+  };
 }
 
 async function main() {
@@ -55,8 +71,9 @@ async function main() {
   const built: Record<string, unknown> = {};
 
   for (const profile of PROFILES) {
-    if (!(await reachable(profile.port))) {
-      console.log(`skipping ${profile.mode}: nothing answering on :${profile.port}`);
+    const check = await probe(profile.port);
+    if (!check.ok) {
+      console.log(`skipping ${profile.mode}: ${check.why}`);
       console.log(`  start it with:  ./scripts/osrm-up.sh ${profile.mode}\n`);
       continue;
     }

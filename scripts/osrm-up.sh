@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 # Builds and serves a local OSRM routing engine for one city and profile.
 #
-#   ./scripts/osrm-up.sh car     -> serves on :5000
-#   ./scripts/osrm-up.sh foot    -> serves on :5001
+#   ./scripts/osrm-up.sh car     -> serves on :5100
+#   ./scripts/osrm-up.sh foot    -> serves on :5101
+#
+# Not :5000 — macOS's AirPlay Receiver owns that port (and :7000) by default,
+# so a container published there is silently shadowed. PORT=... overrides.
 #
 # This is a BUILD-TIME tool. The travel-time matrix is computed once and stored
 # in Postgres; the deployed application never talks to OSRM. Once the matrix is
@@ -18,11 +21,12 @@ DATA_DIR="osrm-data/${CITY}-${PROFILE}"
 IMAGE="ghcr.io/project-osrm/osrm-backend:latest"
 
 case "$PROFILE" in
-  car)  LUA=/opt/car.lua;     PORT=5000 ;;
-  foot) LUA=/opt/foot.lua;    PORT=5001 ;;
-  bike) LUA=/opt/bicycle.lua; PORT=5002 ;;
+  car)  LUA=/opt/car.lua;     DEFAULT_PORT=5100 ;;
+  foot) LUA=/opt/foot.lua;    DEFAULT_PORT=5101 ;;
+  bike) LUA=/opt/bicycle.lua; DEFAULT_PORT=5102 ;;
   *) echo "Unknown profile '$PROFILE'. Use car, foot or bike."; exit 1 ;;
 esac
+PORT="${PORT:-$DEFAULT_PORT}"
 
 PBF="osrm-data/${CITY}-source.osm.pbf"
 
@@ -184,6 +188,21 @@ if [ ! -f "$DATA_DIR/city.osrm.mldgr" ]; then
   docker run --rm -t -v "$PWD/$DATA_DIR:/data" "$IMAGE" osrm-customize /data/city.osrm
 else
   echo "Graph already built, reusing $DATA_DIR"
+fi
+
+# If anything already listens on the port, Docker's forward fails without a
+# word and requests land on whatever got there first. Say who it is instead.
+if command -v lsof >/dev/null && lsof -nP -iTCP:"$PORT" -sTCP:LISTEN >/dev/null 2>&1; then
+  HOLDER="$(lsof -nP -iTCP:"$PORT" -sTCP:LISTEN | awk 'NR==2 {print $1 " (pid " $2 ")"}')"
+  echo
+  echo "Port $PORT is already in use by $HOLDER."
+  case "$HOLDER" in
+    ControlCe*|AirPlay*) echo "That is macOS's AirPlay Receiver." ;;
+    ssh*|limactl*|com.docke*|docker*) echo "Probably an OSRM container from an earlier run — stop it with Ctrl+C in its terminal." ;;
+  esac
+  echo "Or use another port:  PORT=5200 ./scripts/osrm-up.sh $PROFILE"
+  echo "    and then:          OSRM_$(echo "$PROFILE" | tr a-z A-Z)_PORT=5200 npm run build-matrix"
+  exit 1
 fi
 
 echo

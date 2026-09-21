@@ -96,8 +96,9 @@ npm run db:seed
 OSRM is a build-time tool, like a compiler. Once the matrix is in Postgres you
 can stop the container and delete `osrm-data/`. Docker is needed only for this;
 on macOS `brew install colima docker && colima start` is lighter than Docker
-Desktop. For walking legs too, run `./scripts/osrm-up.sh foot` on port 5001
-before building the matrix.
+Desktop. For walking legs too, run `./scripts/osrm-up.sh foot` on port 5101
+before building the matrix. The ports start at 5100 because macOS's AirPlay
+Receiver holds 5000.
 
 At 500 places plus 5 start points that is 257,556 ordered pairs per mode,
 collected in 121 requests. Pairs more than 45 minutes apart are not stored: no

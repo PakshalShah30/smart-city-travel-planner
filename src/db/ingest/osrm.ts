@@ -18,7 +18,7 @@ export type OsrmOptions = {
 };
 
 export function createOsrmTable(options: OsrmOptions = {}): TableFn {
-  const baseUrl = (options.baseUrl ?? 'http://127.0.0.1:5000').replace(/\/$/, '');
+  const baseUrl = (options.baseUrl ?? 'http://127.0.0.1:5100').replace(/\/$/, '');
   const profile = options.profile ?? 'driving';
   const retries = options.retries ?? 2;
 
