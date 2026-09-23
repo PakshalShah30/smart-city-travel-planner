@@ -19,7 +19,9 @@ if (!url) {
   process.exit(1);
 }
 
-const sql = postgres(url, { max: 1 });
+// Without onnotice, every run after the first dumps a raw "extension already
+// exists" notice object that reads like a failure.
+const sql = postgres(url, { max: 1, onnotice: () => {} });
 
 try {
   await sql`CREATE EXTENSION IF NOT EXISTS postgis`;

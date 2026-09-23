@@ -56,6 +56,34 @@ async function main() {
   const places = takeTop(normalise(rawExtract), LIMIT);
   const starts = getStartPoints(CITY);
 
+  // `poi:N` is a rank from takeTop(), not a stable identifier: re-fetching the
+  // extract renumbers every place, which would file all the legs against the
+  // wrong rows and still exit 0. The matrix records each node's location, so
+  // compare against it and refuse rather than corrupt the table.
+  if (matrix) {
+    const built = new Map(matrix.nodes.map((n) => [n.key, n.location]));
+    const live = [
+      ...places.map((p) => [`poi:${p.id}`, p.location] as const),
+      ...starts.map((s) => [`start:${s.id}`, s.location] as const),
+    ];
+    // A key the matrix lacks is harmless — that place simply has no legs. A key
+    // that now points somewhere else is not.
+    const drifted = live.filter(([key, at]) => {
+      const was = built.get(key);
+      return (
+        was !== undefined &&
+        (Math.abs(was.lng - at.lng) > 1e-6 || Math.abs(was.lat - at.lat) > 1e-6)
+      );
+    });
+    if (drifted.length > 0) {
+      throw new Error(
+        `${drifted.length} of ${live.length} matrix keys no longer point at the same place ` +
+          `(first: ${drifted[0][0]}). The extract changed after ` +
+          `src/db/ingest/build/${CITY}-matrix.json was built — rerun npm run build-matrix.`,
+      );
+    }
+  }
+
   console.log(`Seeding ${CITY}: ${places.length} places, ${starts.length} start points`);
 
   const [city] = await db
