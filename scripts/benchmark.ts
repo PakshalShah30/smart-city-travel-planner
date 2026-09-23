@@ -7,14 +7,15 @@ import { writeFileSync } from 'node:fs';
 
 import { generateScenarios } from '../src/lib/benchmark/scenarios';
 import { runBenchmark, toMarkdown } from '../src/lib/benchmark/run';
-import { GREEDY } from '../src/lib/solver/greedy';
-import { POPULARITY_FIRST } from '../src/lib/solver/baselines';
+import { runMoveAblation } from '../src/lib/benchmark/ablation';
+import { BENCHMARK_SOLVERS } from '../src/lib/benchmark/solvers';
 
 const scenarios = generateScenarios(50);
-const result = runBenchmark(scenarios, [POPULARITY_FIRST, GREEDY]);
+// One registry, so adding a solver does not mean remembering to edit this file.
+const result = runBenchmark(scenarios, [...BENCHMARK_SOLVERS]);
 
 const today = new Date().toISOString().slice(0, 10);
-writeFileSync('docs/benchmark.md', toMarkdown(result, today));
+writeFileSync('docs/benchmark.md', toMarkdown(result, today, runMoveAblation(scenarios)));
 
 for (const s of result.summaries) {
   console.log(
@@ -26,8 +27,12 @@ for (const s of result.summaries) {
   );
 }
 
-const { winner, against, wins, losses, ties } = result.headToHead;
-console.log(`\n${winner} vs ${against}: ${wins} wins, ${losses} losses, ${ties} ties`);
+// Each solver against the one before it: with three solvers, comparing only
+// against the naive baseline would let a step that adds nothing hide behind
+// the gap the previous step opened.
+for (const { winner, against, wins, losses, ties } of result.steps) {
+  console.log(`\n${winner} vs ${against}: ${wins} wins, ${losses} losses, ${ties} ties`);
+}
 console.log('docs/benchmark.md written');
 
 const broken = result.summaries.filter((s) => s.violations > 0);

@@ -140,8 +140,11 @@ export function solveGreedy(req: SolveRequest): Solution {
  * construction every leftover failed for one of three reasons, checked cheapest
  * first. Note that `day-full` is the common case and is not a failure: it means
  * the day filled up with better-value stops.
+ *
+ * Exported so `greedy+local` can explain its leftovers the same way rather than
+ * growing a second, subtly different version of the same reasoning.
  */
-function explainRejections(
+export function explainRejections(
   leftovers: readonly Candidate[],
   order: readonly Candidate[],
   req: SolveRequest,

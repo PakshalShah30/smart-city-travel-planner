@@ -58,7 +58,7 @@ export type SolveRequest = {
 };
 
 /** Every algorithm that can produce a Solution. Benchmarked against each other. */
-export type SolverName = 'popularity-first' | 'greedy';
+export type SolverName = 'popularity-first' | 'greedy' | 'greedy+local';
 
 export type Stop = {
   candidate: Candidate;

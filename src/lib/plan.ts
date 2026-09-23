@@ -9,7 +9,7 @@ import { z } from 'zod';
 
 import { estimateTravelSeconds } from './geo';
 import { getCandidates, getCity, getStartPoint, type City, type StartPoint } from './pois';
-import { solveGreedy } from './solver/greedy';
+import { solveGreedyLocal } from './solver/local-search';
 import type { Solution } from './solver/types';
 
 export const CATEGORY_OPTIONS = [
@@ -88,7 +88,7 @@ export function createPlan(input: unknown): Plan | PlanError {
   const startAt = localStart(params.date, params.at);
   if (Number.isNaN(startAt.getTime())) return { error: 'That date is not a real date.' };
 
-  const solution = solveGreedy({
+  const solution = solveGreedyLocal({
     start: startPoint.location,
     startAt,
     budgetMin: Math.round(params.hours * 60),

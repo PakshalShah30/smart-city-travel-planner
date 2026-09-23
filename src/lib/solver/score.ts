@@ -49,3 +49,29 @@ export function scoreCandidate(
     weights.variety * varietyScore(candidate, chosenCategories)
   );
 }
+
+/**
+ * The score a candidate actually contributes to a finished plan.
+ *
+ * Both existing solvers score their chosen stops against the set of categories
+ * the finished day contains, which by construction already contains every
+ * category of every chosen stop — so `varietyScore` is 0 for all of them and
+ * the variety term never reaches the reported total. Variety therefore steers
+ * the *search* but is not part of the *objective*.
+ *
+ * This helper makes that explicit by evaluating a candidate against its own
+ * categories, which is the same thing the finished-plan set does. It is defined
+ * in terms of `scoreCandidate` rather than reimplementing the arithmetic, so it
+ * cannot drift away from what the benchmark measures.
+ *
+ * The consequence matters for local search: the objective depends only on WHICH
+ * stops are in the plan, not on their order. Reordering is therefore always
+ * score-neutral, and the only way to gain is to fit more or better stops in.
+ */
+export function realisedScore(
+  candidate: Candidate,
+  interests: readonly string[],
+  weights: ScoringWeights = DEFAULT_WEIGHTS,
+): number {
+  return scoreCandidate(candidate, interests, new Set(candidate.categories), weights);
+}

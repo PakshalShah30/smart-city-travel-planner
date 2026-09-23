@@ -7,6 +7,7 @@ import { POPULARITY_FIRST, solvePopularityFirst } from '../solver/baselines';
 import type { SolveRequest } from '../solver/types';
 import { generateScenarios } from './scenarios';
 import { runBenchmark, validate } from './run';
+import { BENCHMARK_SOLVERS } from './solvers';
 
 const req: SolveRequest = {
   start: { lng: 72.828, lat: 18.9155 },
@@ -38,6 +39,25 @@ describe('validate', () => {
     const good = solveGreedy(req);
     const cheat = { ...good, endAt: new Date(good.endAt.getTime() - 60_000) };
     expect(validate(cheat, req)).toContain('bad-return');
+  });
+
+  it('catches a schedule whose arrival times do not follow from the travel function', () => {
+    // The cheapest way to look good: quote travel legs you did not pay for.
+    const good = solveGreedy(req);
+    const rushed = {
+      ...good.stops[0],
+      travelFromPrevS: Math.max(0, good.stops[0].travelFromPrevS - 60),
+    };
+    expect(validate({ ...good, stops: [rushed, ...good.stops.slice(1)] }, req)).toContain(
+      'bad-schedule',
+    );
+  });
+
+  it('catches a solver that grades its own homework generously', () => {
+    const good = solveGreedy(req);
+    expect(validate({ ...good, totalScore: good.totalScore + 1 }, req)).toContain(
+      'score-mismatch',
+    );
   });
 
   it('catches arriving somewhere shut', () => {
@@ -81,5 +101,24 @@ describe('runBenchmark', () => {
   it('reports no invariant violations from either solver', () => {
     const result = runBenchmark(generateScenarios(20), [POPULARITY_FIRST, GREEDY]);
     for (const s of result.summaries) expect(s.violations).toBe(0);
+  });
+
+  it('runs all three solvers cleanly and improves at every step', () => {
+    const result = runBenchmark(generateScenarios(20), [...BENCHMARK_SOLVERS]);
+
+    expect(result.summaries).toHaveLength(3);
+    for (const s of result.summaries) expect(s.violations).toBe(0);
+
+    const scores = result.summaries.map((s) => s.meanScore);
+    expect(scores[1]).toBeGreaterThan(scores[0]);
+    expect(scores[2]).toBeGreaterThan(scores[1]);
+  });
+
+  it('never lets local search lose a scenario to the greedy solver it starts from', () => {
+    // If this ever fails, local search accepted a move it should have rejected.
+    const result = runBenchmark(generateScenarios(20), [...BENCHMARK_SOLVERS]);
+    const step = result.steps.at(-1)!;
+    expect(step.against).toBe(GREEDY.label);
+    expect(step.losses).toBe(0);
   });
 });
