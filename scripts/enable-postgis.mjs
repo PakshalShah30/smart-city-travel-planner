@@ -7,14 +7,22 @@
  * where drizzle-kit would ignore it (its journal only tracks generated files).
  *
  * Idempotent: safe to run on every migrate.
+ *
+ * Uses the direct connection, not the pooled one. A connection pooler hands out
+ * a different backend per statement, which is fine for ordinary queries but
+ * wrong for schema changes. Neon publishes both; DATABASE_URL_UNPOOLED is the
+ * direct host. Falls back to DATABASE_URL for a Postgres with no pooler.
  */
 import postgres from 'postgres';
 
-const url = process.env.DATABASE_URL;
+// `||`, not `??`: a copied .env.example leaves DATABASE_URL_UNPOOLED as an
+// empty string, which `??` would keep instead of falling back.
+const url = process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL;
 
 if (!url) {
   console.error(
-    'DATABASE_URL is not set. It should be in .env.local — run `neon link` if it is missing.',
+    'Neither DATABASE_URL_UNPOOLED nor DATABASE_URL is set. Both should be in ' +
+      '.env.local — run `neon link` if they are missing.',
   );
   process.exit(1);
 }
